@@ -1,16 +1,78 @@
-# projek_flutter2
+🛒 Simple Cart Page Implementation – Flutter App
+📌 Deskripsi
 
-A new Flutter project.
+Simple Cart Page Implementation adalah aplikasi Flutter sederhana untuk simulasi keranjang belanja.
+Pengguna dapat:
 
-## Getting Started
+Melihat daftar produk.
 
-This project is a starting point for a Flutter application.
+Menambahkan produk ke keranjang.
 
-A few resources to get you started if this is your first Flutter project:
+Melihat isi keranjang & menghapus produk.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+App ini dibuat untuk mempelajari:
+✅ Perbedaan StatelessWidget vs StatefulWidget
+✅ Penerapan state management (Provider)
+✅ Navigasi antar layar (MaterialApp + Navigator)
+✅ Struktur widget tree yang rapi
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+🏗️ Widget Tree (Diagram Singkat)
+MyApp (StatelessWidget)
+│
+└── MaterialApp
+    │
+    ├── HomePage (StatefulWidget)
+    │   │
+    │   ├── AppBar
+    │   ├── Promo Banner
+    │   ├── Category List (CategoryItem widgets)
+    │   ├── Rekomendasi Produk (RekomendasiProduk widgets)
+    │   └── BottomNavigationBar
+    │
+    └── CartScreen (StatelessWidget)
+        │
+        ├── AppBar (Delete All Button)
+        └── Body
+            ├── Empty State → Text("Keranjang masih kosong")
+            └── CartList (ListView of CartItem widgets)
+
+🔄 Pendekatan State Management
+
+Aplikasi ini menggunakan Provider + ChangeNotifier (state global sederhana) untuk mengelola data keranjang.
+
+Alasan Pemilihan:
+
+Resmi direkomendasikan Flutter Docs untuk pemula.
+
+Lebih bersih dibanding hanya setState, karena data keranjang bisa dipakai di banyak widget & layar.
+
+Memisahkan logic (CartProvider) dari UI (Widget) → kode lebih terstruktur & mudah diperluas.
+
+Reaktif: begitu ada item ditambah/dihapus, semua UI yang listen: true langsung update.
+
+📂 Struktur Project
+lib/
+│
+├── main.dart               # Root app + ThemeData (emas)
+├── home_page.dart          # Halaman utama
+│
+├── models/
+│   └── cart_item.dart      # Model data CartItem
+│
+├── providers/
+│   └── cart_provider.dart  # State management keranjang
+│
+└── widgets/
+    ├── product_item.dart   # UI 1 produk
+    ├── cart_list.dart      # UI list keranjang
+    └── cart_screen.dart    # Halaman keranjang
+
+🚀 Cara Menjalankan
+
+Clone repo / copy project ini.
+
+Jalankan perintah:
+
+flutter pub get
+flutter run
+
